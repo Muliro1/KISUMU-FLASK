@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+	    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename = 'style.css')}}">
+        <meta charset="utf-8">
+        <title>MY DIARY</title>
+    </head>
+<body>
+	<ul>
+		<li><a href="#">Home</a></li>
+		<li><a href="#">News</a></li>
+		<li><a href="{{url_for('login')}}">Logout</a></li>
+		<li><a href="{{url_for('get_entries')}}">Entries</a></li>
+	</ul>
+    <form name = "signup"  action = "?" method = 'post'>
+    	<fieldset>
+    		<legend>fill in the form to register</legend>
+	    <div id = "userinfo">
+		    <p>Firstname: </p><input type = "text", name = "firstname" required size = "40">
+		    <p>Lastname:</p> <input type = "text", name = "lastname" required size = "40">
+		    <p>Username: </p><input type = "text", name = "username" required size = "40">
+		    <p>Email:</p> <input type = "email", name = "email" required size = "40">
+		    <p>Password: </p><input type = "password", name = "password" required size = "40">
+		    <a href = 'login.html' >
+				<button class="button" onclick = 'return MyFunction()'>Register</button>
+		    </a>
+	    </div>
+	    </fieldset>
+    </form>
+	<hr>
+	<small>
+         <p id = "conditions" class = 'bottom'>By creating an account you agree to our 
+     	    <a href="#">
+     	        Terms & Privacy
+             </a>
+        <p class = 'bottom'>Already have an account? login <a href = '{{url_for("login")}}'> here </a></p>
+	</small>
+	<script type = 'text/javascript'>
+		function MyFunction(){
+			 if(document.forms['signup']['firstname'].value == ''){
+			 	alert('please provide a firstname!');
+			 	document.forms['signup']['firstname'].focus();
+			 	return false;
+			 }
+			 if(document.forms['signup']['lastname'].value == ''){
+			 	alert('Please provide lastname');
+			 	document.forms['signup']['lastname'].focus();
+			 	return false;
+			 }
+			  if(document.forms['signup']['username'].value == ''){
+			 	alert('please provide a username!');
+			 	document.forms['signup']['username'].focus();
+			 	return false;
+			 }
+			 if(document.forms['signup']['email'].value == ''){
+			 	alert('Please provide email');
+			 	document.forms['signup']['email'].focus();
+			 	return false;
+			 }
+			 if(document.forms['signup']['password'].value == ''){
+			 	alert('please provide a password!');
+			 	document.forms['signup']['password'].focus();
+			 	return false;
+			 }
+			 alert('You have successfully created an account')
+			 return true;
+		}
+	</script>
+</body>
+</html>

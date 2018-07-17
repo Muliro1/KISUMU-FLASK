@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+	    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename = 'style.css')}}">
+        <meta charset="utf-8">
+        <title>MY DIARY</title>
+    </head>
+<body>
+	<nav>
+	    <ul>
+		    <li><a href="#">Home</a></li>
+		    <li><a href="#">News</a></li>
+		    <li><a href="{{url_for('login')}}">Logout</a></li>
+		    <li><a href="{{url_for('get_entries')}}">Entries</a></li>
+	    </ul>
+    </nav>
+    <form name = "CREATE DIARY"  action = "?" method = 'post'>
+    	<fieldset>
+    		<div>
+    		    <p>entry title :</p><input type = 'text' name = 'title' size = 60  required>
+    		    <p>date :</p><input type = 'datetime-local' name = 'title' class = 'datetime'size = 60 required>
+    		    <p>time :</p><input type = 'time' name = 'title' size = 60 class = 'datetime'required>
+    		    <p>diary content :</p><textarea rows = '10' cols = '60' maxlength = '1000'>Your entry here</textarea>
+    		    <button class="button" >create entry</button>
+	        </div>
+	    </fieldset>
+    </form>
+</body>
+</html>

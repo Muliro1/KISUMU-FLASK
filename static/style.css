@@ -1,0 +1,94 @@
+div input {
+	display:block;
+	margin:auto;
+	padding-top: 10px;
+	border-radius:5px;
+
+} 
+
+h1{
+	text-align:center;
+	text-decoration:none;
+	font-family:verdana, Geneva, Tahoma, sans-serif;
+	font-size:2vw;
+	background-color:DarkGrey;
+	padding:10px;
+	margin-top:auto;
+}
+
+body{
+	background-color:DarkGray;
+	margin:0;
+}
+
+
+div select {
+	display:block;
+	margin:10px;
+} 
+
+.input{
+	background-color:Black;
+	margin-top:3px
+}
+div p{
+	text-align:center;
+	letter-spacing:5px;
+	font-family:verdana, Geneva, Tahoma, sans-serif;
+
+}
+p{
+	text-align:center;
+	
+}
+#input{
+	margin-bottom:30px;
+}
+
+.button{margin-top:5px;
+		background-color:#333;
+		font-size:20px;
+		display:block;
+		margin:auto;
+		color:white;
+		margin-top:10px
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+	padding: 0;
+	overflow: hidden;
+    background-color: #333;
+	
+}
+
+li {
+	display: inline;
+	float:left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+	text-decoration: none;
+	font-family:verdana, Geneva, Tahoma, sans-serif;
+	letter-spacing:5px;
+}
+
+.bottom{
+	font-family:verdana, Geneva, Tahoma, sans-serif;
+	letter-spacing:5px;
+}
+
+textarea{
+	display:block;
+	margin:auto;
+}
+
+
+
+
+

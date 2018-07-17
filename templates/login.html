@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename = 'style.css')}}">
+    <meta charset="utf-8">
+    <title>
+	    MY DIARY
+    </title>
+</head>
+<body>
+	<ul>
+		<li><a href="{{url_for('create_entry')}}">Home</a></li>
+		<li><a href="#">News</a></li>
+		<li><a href="#">Contact</a></li>
+		<li><a href="{{url_for('get_entries')}}">Entries</a></li>
+	</ul>
+	<form action = "?" id = "input" method = 'post' name = 'input' onsubmit="return MyFunction();">
+	    <fieldset>
+			<legend> Log In </legend>
+	        <div id = "field">
+		        <p>
+		 	        Username:
+		        </p>
+		 	        <input type="text" name="usrname" required size = "40">
+		        <p>
+		 	        Password:
+		        </p>
+		        <input type = "password" name = "password" required size = "40">
+		        <a href = "{{url_for('create_entry')}}"><button class="button" onclick = 'return MyFunction()'>Log in</button></a>
+	        </div>
+	    </fieldset>
+    </form>
+    <p class = 'bottom'>
+		<small>
+		    don't have an account? sign up <a href = "{{url_for('register')}}"> here. </a>
+	    </small>
+	</p>
+    <script type = 'text/javascript'>
+		function MyFunction(){
+			 if(document.forms['input']['usrname'].value == ''){
+			 	alert('please provide a username!');
+			 	document.forms['input']['usrname'].focus();
+			 	return false
+			 }
+			 if(document.forms['input']['password'].value == ''){
+			 	alert('Please provide password');
+			 	document.forms['input']['password'].focus();
+			 	return false
+			 }
+			 if(document.forms['input']['usrname'].value != '' && document.forms['input']['password'].value != ''){
+			 	alert('You are logged in as ' + document.forms['input']['usrname'].value) 
+			 	return false
+			 }
+			 return true;
+			}
+	</script>
+
+</body>
+</html>

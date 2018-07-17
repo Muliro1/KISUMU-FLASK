@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename = 'style.css')}}">
+    <meta charset="utf-8">
+    <title>
+	    MY DIARY
+    </title>
+</head>
+<body>
+	<ul>
+		<li><a href="{{url_for('create_entry')}}">Home</a></li>
+		<li><a href="#">News</a></li>
+		<li><a href="#">Contact</a></li>
+		<li><a href="{{url_for('get_entries')}}">Entries</a></li>
+	</ul>
+    <div>
+    	<img src = 'me.jpg' alt = 'profile_pic' width = 150 height = 150>
+    	 <p class="title">Michael Muliro</p>
+    	 <p>Mulirokhaemba@gmail.com</p>
+    	 <p>Six diary<a href = "{{url_for('get_entries')}}">entries</a></p>
+    </div>
+    <fieldset>
+        <table id="customers">
+            <tr>
+                <th>Entries</th>
+            </tr>
+            <tr>
+                <td>Bleach Anime characters:Kurosaki Ichigo, Kuchiki Rukia, Kuchiki Byakuya, Zaraki kenpachi</td>
+            </tr>
+            <tr>
+                <td>Naruto Anime characters:Uzumaki Naruto, Uchiha Sasuke, </td>
+            </tr>
+            <tr>
+                <td>Noblesse Manhwa characters:</td>
+            </tr>
+            <tr>
+                <td>The seven deadly sins Anime characters:</td>
+            </tr>
+            <tr>
+                <td>One Punch Man Characters:Demon Cyborg</td>
+            </tr>
+        </table>
+    </body>
+</html>
+

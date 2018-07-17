@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+	    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename = 'style.css')}}">
+        <meta charset="utf-8">
+        <title>MY DIARY</title>
+    </head>
+<body>
+	<nav>
+	    <ul>
+		    <li><a href="{{url_for('create_entry')}}">Home</a></li>
+		    <li><a href="{{url_for('create_entry')}}">create entry</a></li>
+		    <li><a href="{{url_for('login')}}">Logout</a></li>
+        <li><a href="{{url_for('get_entry')}}">Account</a></li>
+	    </ul>
+    </nav>
+    <div style="overflow-x:auto;">
+    <table id="customers">
+  <tr>
+    <th>Entries</th>
+    <th>Action</th>
+    <th>Action</th>
+  </tr>
+  <tr>
+    <td>Bleach Anime characters</td>
+    <td><button class="button" >delete entry</button></td>
+    <td><button class="button" >edit entry</button></td>
+  </tr>
+  <tr>
+    <td>Naruto Anime characters</td>
+    <td><button class="button" >delete entry</button></td>
+    <td><button class="button" >edit entry</button></td>
+  </tr>
+  <tr>
+    <td>Noblesse Manhwa characters</td>
+    <td><button class="button" >delete entry</button></td>
+    <td><button class="button" >edit entry</button></td>
+  </tr>
+  <tr>
+    <td>The seven deadly sins Anime characters</td>
+    <td><button class="button" >delete entry</button></td>
+    <td><button class="button" >edit entry</button></td>
+  </tr>
+  <tr>
+    <td>One Punch Man Characters</td>
+    <td><button class="button" >delete entry</button></td>
+    <td><button class="button" >edit entry</button></td>
+  </tr>
+</table>
+</div>
+</body>
+</html>
