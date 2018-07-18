@@ -8,7 +8,7 @@ install:
 env:
   global:
       - PYTHONPATH=.
-      -SECRET_KEY=relapse92
+      - SECRET_KEY=relapse92
 # command to run tests
 script: 
   - "python Tests.py"
