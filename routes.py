@@ -2,6 +2,8 @@ from flask import Flask, render_template, url_for, flash, redirect, request, ses
 
 app = Flask(__name__)
 
+app.config['SECRET_KEY'] = 'relapse92'
+
 
 
 @app.route('/api/v1/register', methods = ['GET', 'POST'])
