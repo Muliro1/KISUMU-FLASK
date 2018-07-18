@@ -11,7 +11,7 @@ env:
       -SECRET_KEY=relapse92
 # command to run tests
 script: 
-  - "python Tests.py test"
+  - "python Tests.py"
 
 
   
