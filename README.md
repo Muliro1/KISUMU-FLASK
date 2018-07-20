@@ -12,6 +12,10 @@ install virtualenv
 ```
 python -m pip install virtualenv
 ```
+open command prompt and type:
+```
+python routes.py
+```
 open postman and type these links
 ```
 GET http://localhost:5000/api/v1/entries
