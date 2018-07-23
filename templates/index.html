@@ -12,7 +12,7 @@
 		<li><a href="{{url_for('login')}}">Logout</a></li>
 		<li><a href="{{url_for('get_entries')}}">Entries</a></li>
 	</ul>
-    <form name = "signup"  action = "?" method = 'post'>
+    <form name = "signup"  action = "{{url_for('register')}}" method = 'post'>
     	<fieldset>
     		<legend>fill in the form to register</legend>
 	    <div id = "userinfo">
