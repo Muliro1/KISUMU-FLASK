@@ -1,6 +1,6 @@
 from routes import app
 import unittest
-import coverage
+
 
 class FlaskTestCase(unittest.TestCase):
 	def setup(self):
