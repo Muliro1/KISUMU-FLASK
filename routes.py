@@ -23,7 +23,7 @@ def create_entry():
 		dummy_entries.append(new_dict)
 		json_str = json.dumps(dummy_entries)
 	except:
-		return 'please make sure all the variables are included'
+		return jsonify({'message': 'please include all the required data'})
 	return jsonify({'current_len':len(dummy_entries)})
 
 @app.route('/api/v1/entries', methods = ['GET', 'POST'])
@@ -48,7 +48,7 @@ def delete_entry(id):
 	#This view function deletes a particular diary entry from the database
 	'''
 	dummy_entries.pop(id)
-	return jsonify({'current_len':len(dummy_entries)})
+	return jsonify({'message':'you have deleted an entry'})
 
 
 
