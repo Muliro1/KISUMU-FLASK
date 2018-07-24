@@ -9,7 +9,7 @@ class FlaskTestCase(unittest.TestCase):
 		tester = app.test_client(self)
 		response = tester.get('/api/v1/entries', content_type = 'html/text')
 		self.assertEqual(response.status_code, 200)
-	def test_logout(self):
+	def test_create_entry(self):
 		tester = app.test_client(self)
 		response = tester.get('/api/v1/entries/create_entry', content_type = 'html/text')
 		self.assertEqual(response.status_code, 500)
