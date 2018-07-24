@@ -48,7 +48,7 @@ def delete_entry(id):
 	#This view function deletes a particular diary entry from the database
 	'''
 	dummy_entries.pop(id)
-	return jsonify({'current_len':len(dummy_entries)})
+	return jsonify({'message':'you have deleted an entry'})
 
 
 
