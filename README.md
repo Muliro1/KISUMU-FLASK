@@ -23,3 +23,6 @@ Get http://localhost:5000/api/v1/entries/<int:id>
 POST http://localhost:5000/api/v1/entries/create_entry
 DELETE http://localhost:5000/api/v1/entries/delete_entry/<int:id>
 ```
+Ensure that when posting data the the create_entry url, it has all the required data ie
+```
+title, content, date, time, data_id
