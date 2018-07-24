@@ -10,15 +10,20 @@ dummy_entries = []
 def create_entry():
 	'''
 	This view function creates a new entry and adds it to the list of dictionaries
+	go to postman and using a POST method, add a dictionary within the body containing 
+	five keys title, date, time, content and data_id..then add in values of your own choosing
 	'''
-	title = request.get_json()['title']
-	date = request.get_json()['date']
-	time = request.get_json()['time']
-	content = request.get_json()['content']
-	data_id = request.get_json()['data_id']
-	new_dict = {'title':title, 'date':date, 'time':time, 'content':content, 'data_id':data_id}
-	dummy_entries.append(new_dict)
-	json_str = json.dumps(dummy_entries)
+	try:
+		title = request.get_json()['title']
+		date = request.get_json()['date']
+		time = request.get_json()['time']
+		content = request.get_json()['content']
+		data_id = request.get_json()['data_id']
+		new_dict = {'title':title, 'date':date, 'time':time, 'content':content, 'data_id':data_id}
+		dummy_entries.append(new_dict)
+		json_str = json.dumps(dummy_entries)
+	except:
+		return 'please make sure all the variables are included'
 	return jsonify({'current_len':len(dummy_entries)})
 
 @app.route('/api/v1/entries', methods = ['GET', 'POST'])
