@@ -1,12 +1,50 @@
-from flask import Flask, render_template, url_for, flash, redirect, request, jsonify, json
+from flask import Flask, request, jsonify, json, make_response
+from functools import wraps
+from database import UserDb, EntryDb
+
+
+
 
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = 'relapse92'
 
 dummy_entries = []
+users = [{}]
 
-@app.route('/api/v1/entries/create_entry', methods = ['GET', 'POST'])
+@app.route('/auth/signup', methods = ['GET', 'POST'])
+def register():
+	'''
+	this route enables an individual to register
+	'''
+	try:
+		fullname = request.get_json()['fullname']
+		username = request.get_json()['username']
+		email = request.get_json()['email']
+		password = request.get_json()['password']
+		confirm_password = request.get_json()['confirm_password']
+		new_dict = {'fullname':fullname, 'username':username, 'email':email, 'password':confirm_password}
+		users.append(new_dict)
+	except:
+		return 'please include all the required data'
+	return jsonify({'message':'you are now registered and have an account'})
+
+@app.route('/auth/login', methods = ['GET', 'POST'])
+def login():
+	'''
+	this route calls a view function that checks whether anindividual is registered
+	and logs them in
+	'''
+	user_id = len(users) - 1
+	email = request.get_json()['email']
+	password = request.get_json()['password']
+	if email == users[user_id]['email'] and password in users[user_id]['password']:
+		return jsonify({'message':'you are now logged in'})
+	else:
+		return jsonify({'message':'you need to register before logging in'})
+
+
+@app.route('/entries', methods = ['GET', 'POST'])
 def create_entry():
 	'''
 	This view function creates a new entry and adds it to the list of dictionaries
@@ -26,14 +64,14 @@ def create_entry():
 		return jsonify({'message': 'please include all the required data'})
 	return jsonify({'current_len':len(dummy_entries)})
 
-@app.route('/api/v1/entries', methods = ['GET', 'POST'])
+@app.route('/entries', methods = ['GET', 'POST'])
 def get_entries():
 	'''
 	This view function returns all the diary entries
 	'''
 	return jsonify(dummy_entries)
 
-@app.route('/api/v1/entries/<int:id>', methods = ['GET', 'POST'])
+@app.route('/entries/<int:entryId>', methods = ['GET', 'POST'])
 def get_entry(id):
 	'''
 	This view function displays a specific entry using an id
@@ -42,13 +80,12 @@ def get_entry(id):
 
 
 
-@app.route('/api/v1/entries/delete/<int:id>', methods = ['GET','DELETE'])
+@app.route('/entries/<int:entryId>', methods = ['GET','PUT'])
 def delete_entry(id):
 	'''
 	#This view function deletes a particular diary entry from the database
 	'''
-	dummy_entries.pop(id)
-	return jsonify({'message':'you have deleted an entry'})
+	return jsonify(dummy_entries[id])
 
 
 
