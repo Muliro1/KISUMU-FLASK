@@ -1,16 +1,28 @@
 # KISUMU-FLASK-DIARY-APP
 [![Build Status](https://travis-ci.org/Muliro1/KISUMU-FLASK.svg?branch=ft-Routes-159099006)](https://travis-ci.org/Muliro1/KISUMU-FLASK)   <a href="https://codeclimate.com/github/codeclimate/codeclimate/test_coverage"><img src="https://api.codeclimate.com/v1/badges/a99a88d28ad37a79dbf6/test_coverage" /></a> [![Coverage Status](https://coveralls.io/repos/github/Muliro1/KISUMU-FLASK/badge.svg)](https://coveralls.io/github/Muliro1/KISUMU-FLASK)
 
-
-
-install flask
+This is a set of API endpoints with various functionality
+clone the repository
 ```
-python -m pip install flask
-
+https://github.com/Muliro1/KISUMU-FLASK
 ```
 install virtualenv
 ```
 python -m pip install virtualenv
+```
+cd into the directory and create a virtual environment like so
+```
+virtualenv venv
+```
+activate the virtualenv with
+```
+venv\Scripts\activate remember s is caps
+```
+
+install requirements.txt file and flask
+```
+python -m pip install flask
+
 ```
 open command prompt and type:
 ```
