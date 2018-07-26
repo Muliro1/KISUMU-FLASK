@@ -1,5 +1,7 @@
 from flask import Flask, request, jsonify, json, make_response
 from functools import wraps
+import jwt
+import datetime
 from database import UserDb, EntryDb
 
 
@@ -13,6 +15,18 @@ user_db = UserDb()
 user_db.create_table()
 entry_db = EntryDb()
 entry_db.create_table()
+
+def token_required(f):
+	def decorated(*args, **kwargs):
+		token = request.args.get('token')
+		if not token:
+			return jsonify({'message':'token is missing!'}), 403
+		try:
+			data = jwt.decode(token, app.config['SECRET_KEY'])
+		except:
+			return jsonify({'message':'token is invalid'}), 403
+		return f(*args, **kwargs)
+	return decorated
 
 @app.route('/auth/signup', methods = ['GET', 'POST'])
 def register():
@@ -41,6 +55,7 @@ def login():
 	this route calls a view function that checks whether anindividual is registered
 	and logs them in
 	'''
+	auth = request.authorization
 	user_db.c.execute('''
 		SELECT email, password FROM Users
 		''')
@@ -49,12 +64,13 @@ def login():
 	user_db.close()
 	email = request.get_json()['email']
 	password = request.get_json()['password']
-	if email in rows and password in rows:
-		return jsonify({'message':'you are now logged in'})
+	if auth and auth.password == 'password':
+		token = jwt.encode({'password':auth.password, 'exp':datetime.datetime.utcnow() + datetime.timedelta(minutes = 1440)}, app.config['SECRET_KEY'])
+		return jsonify({'token':token.decode('UTF-8')})
 	else:
-		return jsonify({'message':'you need to register before logging in'})
+		return jsonify({'message':'could not verify'})
 
-
+@token_required
 @app.route('/entries', methods = ['POST'])
 def add_entry():
 	'''
@@ -77,7 +93,7 @@ def add_entry():
 	except:
 		return jsonify({'message': 'please include all the required data'})
 	return jsonify({'current_len':len(dummy_entries)})
-
+@token_required
 @app.route('/entries', methods = ['GET'])
 def get_entries():
 	'''
@@ -92,7 +108,7 @@ def get_entries():
 	keys = ['title', 'date', 'time', 'content']
 	new_dict = {k: v for k, v in zip(keys, values)}
 	return jsonify(new_dict)
-
+@token_required
 @app.route('/entries/<int:entryId>', methods = ['GET'])
 def get_entry(entryId):
 	'''
@@ -105,7 +121,7 @@ def get_entry(entryId):
 	return jsonify({output})
 
 
-
+@token_required
 @app.route('/entries/<int:entryId>', methods = ['PUT'])
 def update_entry(entryId):
 	'''
