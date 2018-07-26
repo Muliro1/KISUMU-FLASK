@@ -10,7 +10,9 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'relapse92'
 
 user_db = UserDb()
+user_db.create_table()
 entry_db = EntryDb()
+entry_db.create_table()
 
 @app.route('/auth/signup', methods = ['GET', 'POST'])
 def register():
@@ -23,7 +25,6 @@ def register():
 		email = request.get_json()['email']
 		password = request.get_json()['password']
 		confirm_password = request.get_json()['confirm_password']
-		user_db.create_table()
 		user_db.c.execute('''
 			INSERT into Users (fullname, username, email, password)
 			VALUES({}, {}, {}, {})
@@ -67,7 +68,6 @@ def create_entry():
 		time = request.get_json()['time']
 		content = request.get_json()['content']
 		data_id = request.get_json()['data_id']
-		entry_db.create_table()
 		entry_db.c.execute('''
 	    	INSERT INTO Entries(title, day, time_of, content)
 	    	VALUES({}, {}, {}, {})
@@ -92,20 +92,20 @@ def get_entries():
 	return jsonify({rows})
 
 @app.route('/entries/<int:entryId>', methods = ['GET', 'POST'])
-def get_entry(id):
+def get_entry(entryId):
 	'''
 	This view function displays a specific entry using an id
 	'''
 	entry_db.c.execute('''
 		SELECT * FROM Entries WHERE id = %d
-		''') %(id)
+		''') %(entryId )
 	output = entry_db.c.fetchall()
 	return jsonify({output})
 
 
 
 @app.route('/entries/<int:entryId>', methods = ['GET','PUT'])
-def delete_entry(id):
+def update_entry(entryId):
 	'''
 	#This view function deletes a particular diary entry from the database
 	'''
@@ -117,7 +117,9 @@ def delete_entry(id):
 	entry_db.c.execute('''
 		UPDATE Entries SET title = %s, day = %s, time_of = %s, content = %s
 		WHERE id = %d
-		''') %(title, date, time, content)
+		''') %(title, date, time, content, entryId)
+	entry_db.save()
+	entry_db.commit()
 	return jsonify({'message':'you have successfully updated the entry'})
 
 

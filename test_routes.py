@@ -5,22 +5,26 @@ import unittest
 class FlaskTestCase(unittest.TestCase):
 	def setup(self):
 		tester = app.test_client(self)
+	def test_signup(self):
+		tester = app.test_client(self)
+		response = tester.get('/auth/signup', content_type = 'application/json')
+		self.assertEqual(response.status_code, 200)
 	def test_login(self):
 		tester = app.test_client(self)
-		response = tester.get('/api/v1/entries', content_type = 'html/text')
-		self.assertEqual(response.status_code, 200)
-	def test_create_entry(self):
+		response = tester.get('/auth/login', content_type = 'application/json')
+		self.assertEqual(response.status_code, 400)
+	def test_add_entry(self):
 		tester = app.test_client(self)
-		response = tester.get('/api/v1/entries/create_entry', content_type = 'html/text')
-		self.assertEqual(response.status_code, 200)
-	def test_info(self):
-		tester = app.test_client(self)
-		response = tester.get('/api/v1/entries/<int:id>', content_type = 'html/text')
+		response = tester.get('/entries/<int:id>', content_type = 'application/json')
 		self.assertEqual(response.status_code, 404)
-	def test_home(self):
+	def test_update_entry(self):
 		tester = app.test_client(self)
-		response = tester.get('/api/v1/entries/delete_entry/<int:id>', content_type = 'html/text')
+		response = tester.get('/entries/<int:id>', content_type = 'application/json')
 		self.assertEqual(response.status_code, 404)
+	def test_get_entries(self):
+		tester = app.test_client(self)
+		response = tester.get('/entries', content_type = 'application/json')
+		self.assertEqual(response.status_code, 200)
 
 
 if __name__ == '__main__':
