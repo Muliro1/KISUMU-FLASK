@@ -15,16 +15,20 @@ class FlaskTestCase(unittest.TestCase):
 		self.assertEqual(response.status_code, 400)
 	def test_add_entry(self):
 		tester = app.test_client(self)
-		response = tester.get('/entries/<int:id>', content_type = 'application/json')
-		self.assertEqual(response.status_code, 404)
+		response = tester.get('/entries', content_type = 'application/json')
+		self.assertEqual(response.status_code, 200)
 	def test_update_entry(self):
 		tester = app.test_client(self)
-		response = tester.get('/entries/<int:id>', content_type = 'application/json')
+		response = tester.get('/entries/<int:entryId>', content_type = 'application/json')
 		self.assertEqual(response.status_code, 404)
 	def test_get_entries(self):
 		tester = app.test_client(self)
 		response = tester.get('/entries', content_type = 'application/json')
 		self.assertEqual(response.status_code, 200)
+	def test_get_entry(self):
+		tester = app.test_client(self)
+		response = tester.get('/entries/<int:id>', content_type = 'application/json')
+		self.assertEqual(response.status_code, 404)
 
 
 if __name__ == '__main__':

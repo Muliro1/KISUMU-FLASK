@@ -55,8 +55,8 @@ def login():
 		return jsonify({'message':'you need to register before logging in'})
 
 
-@app.route('/entries', methods = ['GET', 'POST'])
-def create_entry():
+@app.route('/entries', methods = ['POST'])
+def add_entry():
 	'''
 	This view function creates a new entry and adds it to the database
 	go to postman and using a POST method, add a dictionary within the body containing 
@@ -78,7 +78,7 @@ def create_entry():
 		return jsonify({'message': 'please include all the required data'})
 	return jsonify({'current_len':len(dummy_entries)})
 
-@app.route('/entries', methods = ['GET', 'POST'])
+@app.route('/entries', methods = ['GET'])
 def get_entries():
 	'''
 	This view function returns all the diary entries
@@ -86,12 +86,14 @@ def get_entries():
 	entry_db.c.execute('''
 		SELECT * FROM Entries
 		''')
-	rows = entry_db.c.fetchall()
+	values = entry_db.c.fetchall()
 	user_db.save()
 	user_db.close()
-	return jsonify({rows})
+	keys = ['title', 'date', 'time', 'content']
+	new_dict = {k: v for k, v in zip(keys, values)}
+	return jsonify(new_dict)
 
-@app.route('/entries/<int:entryId>', methods = ['GET', 'POST'])
+@app.route('/entries/<int:entryId>', methods = ['GET'])
 def get_entry(entryId):
 	'''
 	This view function displays a specific entry using an id
@@ -104,7 +106,7 @@ def get_entry(entryId):
 
 
 
-@app.route('/entries/<int:entryId>', methods = ['GET','PUT'])
+@app.route('/entries/<int:entryId>', methods = ['PUT'])
 def update_entry(entryId):
 	'''
 	#This view function deletes a particular diary entry from the database
