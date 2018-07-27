@@ -13,7 +13,7 @@ class UserDb(psycopg2.extensions.connection):
     	email varchar (60) NOT NULL,
     	password varchar (4) NOT NULL,
     	id SERIAL PRIMARY KEY
-                    );''')
+                    )''')
 	def save(self):
 		self.conn.commit()
 	def close(self):
@@ -30,10 +30,8 @@ class EntryDb(psycopg2.extensions.connection):
     	title varchar (20) NOT NULL,
     	day  varchar (10) NOT NULL,
     	time_of  varchar (60) NOT NULL,
-    	content varchar (200) NOT NULL,
-    	id SERIAL PRIMARY KEY
-
-                    );''')
+    	content varchar (200) NOT NULL
+                    )''')
 	def save(self):
 		self.conn.commit()
 	def close(self):
