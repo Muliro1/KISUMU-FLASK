@@ -5,7 +5,7 @@ import datetime
 from database import UserDb, EntryDb
 from flask import  Blueprint
 from database import UserDb
-from flaskblog.Users.utils import token_required
+from project.Users.utils import token_required
 
 users = Blueprint('Users', __name__)
 
