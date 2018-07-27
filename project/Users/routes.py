@@ -9,6 +9,9 @@ from project.Users.utils import token_required
 
 users = Blueprint('Users', __name__)
 
+user_db = UserDb()
+entry_db = EntryDb()
+
 
 
 @users.route('/auth/signup', methods = ['GET', 'POST'])
@@ -16,20 +19,20 @@ def register():
 	'''
 	this route enables an individual to register
 	'''
-	try:
-		fullname = request.get_json()['fullname']
-		username = request.get_json()['username']
-		email = request.get_json()['email']
-		password = request.get_json()['password']
-		confirm_password = request.get_json()['confirm_password']
-		user_db.c.execute('''
-			INSERT into Users (fullname, username, email, password)
-			VALUES({}, {}, {}, {})
-			''').format(fullname, username, email, password)
-		user_db.save()
-		user_db.close()
-	except:
-		return jsonify({'message':'Unable to connect to database'})
+	
+	fullname = request.get_json()['fullname']
+	username = request.get_json()['username']
+	email = request.get_json()['email']
+	password = request.get_json()['password']
+	confirm_password = request.get_json()['confirm_password']
+	user_db.c.execute('''
+		INSERT into Users (fullname, username, email, password, confirm_password)
+		VALUES('%s, %s, %s, %s, %s')
+		''') %(fullname, username, email, password, confirm_password)
+	user_db.save()
+	user_db.close()
+	
+	#return jsonify({'message':'Unable to connect to database'})
 	return jsonify({'message':'you are now registered and have an account'})
 
 @users.route('/auth/login', methods = ['GET', 'POST'])

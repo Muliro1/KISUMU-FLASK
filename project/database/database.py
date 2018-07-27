@@ -13,7 +13,8 @@ class UserDb(psycopg2.extensions.connection):
     	fullname varchar (40) NOT NULL,
     	username varchar (20) NOT NULL,
     	email varchar (60) NOT NULL,
-    	password varchar (4) NOT NULL,
+    	password varchar (20) NOT NULL,
+    	confirm_password varchar (20) NOT NULL,
     	id SERIAL PRIMARY KEY
                     )''')
 	def save(self):
